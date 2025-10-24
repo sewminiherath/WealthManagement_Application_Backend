@@ -1,0 +1,40 @@
+{
+  "name": "express-rest-api",
+  "version": "2.0.0",
+  "description": "Professional Node.js REST API server with Express, MongoDB, JWT Authentication, and advanced features",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "nodemon server.js",
+    "server": "node server.js",
+    "watch": "nodemon server.js"
+  },
+  "keywords": [
+    "express",
+    "rest",
+    "api",
+    "nodejs",
+    "mongodb",
+    "jwt",
+    "authentication",
+    "backend"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
+    "express": "^4.21.2",
+    "express-rate-limit": "^8.1.0",
+    "express-validator": "^7.3.0",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.19.2",
+    "morgan": "^1.10.1",
+    "rotating-file-stream": "^3.2.7"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.10"
+  }
+}
