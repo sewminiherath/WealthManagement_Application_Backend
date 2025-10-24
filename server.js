@@ -35,9 +35,6 @@ morganMiddleware.forEach(middleware => app.use(middleware));
 app.use('/api/', apiLimiter);
 
 // Import routes
-const authRoutes = require('./src/routes/auth.routes');
-const userRoutes = require('./src/routes/user.routes');
-const itemRoutes = require('./src/routes/item.routes');
 const apiRoutes = require('./src/routes/api.routes');
 // Financial Management routes
 const incomeRoutes = require('./src/routes/income.routes');
@@ -45,10 +42,6 @@ const assetsRoutes = require('./src/routes/assets.routes');
 const liabilityRoutes = require('./src/routes/liability.routes');
 const creditCardRoutes = require('./src/routes/creditCard.routes');
 
-// Mount routes
-app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes);
-app.use('/api/items', itemRoutes);
 // Mount financial management routes
 app.use('/api/income', incomeRoutes);
 app.use('/api/assets', assetsRoutes);
@@ -66,9 +59,6 @@ app.get('/', (req, res) => {
     documentation: '/api',
     endpoints: {
       api: '/api',
-      auth: '/api/auth',
-      users: '/api/users',
-      items: '/api/items',
       income: '/api/income',
       assets: '/api/assets',
       liabilities: '/api/liabilities',

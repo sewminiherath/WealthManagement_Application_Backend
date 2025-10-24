@@ -1,0 +1,785 @@
+{
+	"info": {
+		"_postman_id": "financial-manager-api-v2",
+		"name": "Financial Manager API (Auto ID)",
+		"description": "Complete API collection with automatic ID management - IDs are automatically saved when you create records!",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Income",
+			"item": [
+				{
+					"name": "Get All Income",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/income?page=1&limit=10",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"income"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "frequency",
+									"value": "monthly",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "-amount",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Income",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/income/{{income_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"income",
+								"{{income_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Income",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Automatically save the income ID for use in other requests",
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    if (response.success && response.data && response.data._id) {",
+									"        pm.collectionVariables.set('income_id', response.data._id);",
+									"        console.log('✅ Income ID saved:', response.data._id);",
+									"        pm.environment.set('income_id', response.data._id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"incomeSource\": \"Monthly Salary\",\n  \"amount\": 5000,\n  \"frequency\": \"monthly\",\n  \"dateReceived\": \"2025-01-15\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/income",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"income"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Income",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"amount\": 5500,\n  \"frequency\": \"monthly\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/income/{{income_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"income",
+								"{{income_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Income",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/income/{{income_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"income",
+								"{{income_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Income",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/income",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"income"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Assets",
+			"item": [
+				{
+					"name": "Get All Assets",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/assets?page=1&limit=10",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"assets"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "assetsType",
+									"value": "savings",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "-currentValue",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Asset",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/assets/{{asset_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"assets",
+								"{{asset_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Asset",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Automatically save the asset ID",
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    if (response.success && response.data && response.data._id) {",
+									"        pm.collectionVariables.set('asset_id', response.data._id);",
+									"        console.log('✅ Asset ID saved:', response.data._id);",
+									"        pm.environment.set('asset_id', response.data._id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"assetsName\": \"Savings Account\",\n  \"assetsType\": \"savings\",\n  \"currentValue\": 25000,\n  \"interestRate\": 2.5\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/assets",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"assets"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Asset",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"currentValue\": 27000,\n  \"interestRate\": 3.0\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/assets/{{asset_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"assets",
+								"{{asset_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Asset",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/assets/{{asset_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"assets",
+								"{{asset_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Assets",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/assets",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"assets"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Liabilities",
+			"item": [
+				{
+					"name": "Get All Liabilities",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/liabilities?page=1&limit=10",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"liabilities"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "type",
+									"value": "mortgage",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "dueDate",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Liability",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/liabilities/{{liability_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"liabilities",
+								"{{liability_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Liability",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Automatically save the liability ID",
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    if (response.success && response.data && response.data._id) {",
+									"        pm.collectionVariables.set('liability_id', response.data._id);",
+									"        console.log('✅ Liability ID saved:', response.data._id);",
+									"        pm.environment.set('liability_id', response.data._id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"liabilityName\": \"Car Loan\",\n  \"type\": \"loan\",\n  \"outstandingAmount\": 15000,\n  \"interestRate\": 4.5,\n  \"dueDate\": \"2025-02-15\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/liabilities",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"liabilities"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Liability",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"outstandingAmount\": 14500,\n  \"dueDate\": \"2025-03-15\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/liabilities/{{liability_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"liabilities",
+								"{{liability_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Liability",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/liabilities/{{liability_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"liabilities",
+								"{{liability_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Liabilities",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/liabilities",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"liabilities"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Credit Cards",
+			"item": [
+				{
+					"name": "Get All Credit Cards",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/credit-cards?page=1&limit=10",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"credit-cards"
+							],
+							"query": [
+								{
+									"key": "page",
+									"value": "1"
+								},
+								{
+									"key": "limit",
+									"value": "10"
+								},
+								{
+									"key": "bankName",
+									"value": "Chase",
+									"disabled": true
+								},
+								{
+									"key": "sort",
+									"value": "dueDate",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Single Credit Card",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/credit-cards/{{creditcard_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"credit-cards",
+								"{{creditcard_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Credit Card",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Automatically save the credit card ID",
+									"if (pm.response.code === 201) {",
+									"    const response = pm.response.json();",
+									"    if (response.success && response.data && response.data._id) {",
+									"        pm.collectionVariables.set('creditcard_id', response.data._id);",
+									"        console.log('✅ Credit Card ID saved:', response.data._id);",
+									"        pm.environment.set('creditcard_id', response.data._id);",
+									"    }",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"bankName\": \"Chase Bank\",\n  \"cardName\": \"Visa Platinum\",\n  \"creditLimit\": 10000,\n  \"outstandingBalance\": 2500,\n  \"interestRate\": 18.5,\n  \"dueDate\": \"2025-02-15\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/credit-cards",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"credit-cards"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Credit Card",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"outstandingBalance\": 2000,\n  \"dueDate\": \"2025-03-15\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/credit-cards/{{creditcard_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"credit-cards",
+								"{{creditcard_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Credit Card",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/credit-cards/{{creditcard_id}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"credit-cards",
+								"{{creditcard_id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete All Credit Cards",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/credit-cards",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"credit-cards"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "System",
+			"item": [
+				{
+					"name": "Homepage",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "API Documentation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Health Check",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/health",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"health"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "income_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "asset_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "liability_id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "creditcard_id",
+			"value": "",
+			"type": "string"
+		}
+	]
+}

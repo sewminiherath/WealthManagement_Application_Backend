@@ -18,26 +18,6 @@ router.get('/', (req, res) => {
     message: 'Welcome to Express REST API - Financial Manager',
     version: '3.0.0',
     endpoints: {
-      auth: {
-        register: 'POST /api/auth/register',
-        login: 'POST /api/auth/login',
-        me: 'GET /api/auth/me',
-        updatePassword: 'PUT /api/auth/updatepassword',
-      },
-      items: {
-        getAll: 'GET /api/items',
-        getOne: 'GET /api/items/:id',
-        create: 'POST /api/items',
-        update: 'PUT /api/items/:id',
-        delete: 'DELETE /api/items/:id',
-      },
-      users: {
-        getAll: 'GET /api/users (Admin only)',
-        getOne: 'GET /api/users/:id (Admin only)',
-        update: 'PUT /api/users/:id (Admin only)',
-        delete: 'DELETE /api/users/:id (Admin only)',
-        updateProfile: 'PUT /api/users/profile',
-      },
       income: {
         getAll: 'GET /api/income',
         getOne: 'GET /api/income/:id',
