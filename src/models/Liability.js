@@ -94,3 +94,4 @@ liabilitySchema.index({ type: 1 });
 
 module.exports = mongoose.model('Liability', liabilitySchema);
 
+

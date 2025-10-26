@@ -41,12 +41,16 @@ const incomeRoutes = require('./src/routes/income.routes');
 const assetsRoutes = require('./src/routes/assets.routes');
 const liabilityRoutes = require('./src/routes/liability.routes');
 const creditCardRoutes = require('./src/routes/creditCard.routes');
+// AI Recommendation routes
+const recommendationRoutes = require('./src/routes/recommendation.routes');
 
 // Mount financial management routes
 app.use('/api/income', incomeRoutes);
 app.use('/api/assets', assetsRoutes);
 app.use('/api/liabilities', liabilityRoutes);
 app.use('/api/credit-cards', creditCardRoutes);
+// Mount AI recommendation routes
+app.use('/api/recommendations', recommendationRoutes);
 app.use('/api', apiRoutes);
 
 // Home route
@@ -63,6 +67,7 @@ app.get('/', (req, res) => {
       assets: '/api/assets',
       liabilities: '/api/liabilities',
       creditCards: '/api/credit-cards',
+      recommendations: '/api/recommendations',
       health: '/api/health',
     },
   });

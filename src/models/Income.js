@@ -80,3 +80,4 @@ incomeSchema.index({ frequency: 1 });
 
 module.exports = mongoose.model('Income', incomeSchema);
 
+

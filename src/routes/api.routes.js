@@ -50,6 +50,16 @@ router.get('/', (req, res) => {
         delete: 'DELETE /api/credit-cards/:id',
         deleteAll: 'DELETE /api/credit-cards',
       },
+      recommendations: {
+        general: 'GET /api/recommendations/general',
+        budget: 'GET /api/recommendations/budget',
+        investment: 'GET /api/recommendations/investment',
+        debt: 'GET /api/recommendations/debt',
+        credit: 'GET /api/recommendations/credit',
+        summary: 'GET /api/recommendations/summary',
+        all: 'GET /api/recommendations/all',
+        info: 'GET /api/recommendations',
+      },
     },
   });
 });

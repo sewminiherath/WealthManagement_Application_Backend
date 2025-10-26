@@ -556,3 +556,4 @@ for i in {1..10}; do curl http://localhost:3000/api/health; done
 
 *Next: Step 4 - Models Implementation (User and Item schemas)*
 
+
